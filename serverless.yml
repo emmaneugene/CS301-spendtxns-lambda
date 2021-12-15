@@ -1,0 +1,33 @@
+org: moocowdrinksmilk
+app: cs301-lambda
+service: cs301-lambda-api
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
+  region: ap-southeast-1
+
+functions:
+  getTransactions:
+    handler: handler.handler
+    events:
+      - http:
+          path: transactions
+          method: get
+          cors: true
+      - http:
+          path: cards
+          method: get
+          cors: true
+  submitTransactions:
+    handler: handler.handler
+    events:
+      - http:
+          path: submit
+          method: post
+          cors: true
